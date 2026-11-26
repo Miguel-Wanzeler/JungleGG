@@ -18,10 +18,6 @@ builds, runas, confrontos e movimentação pelo mapa.
 
 <img src="docs/screenshots/home.png" width="900" alt="Página inicial do JungleGG">
 
-<br>
-
-[▶️ Ver apresentação em vídeo](docs/videos/junglegg-apresentacao.mp4)
-
 </div>
 
 ---
@@ -57,6 +53,10 @@ dos lados azul e vermelho.
 
 <p align="center">
   <img src="docs/screenshots/rotas.png" width="900" alt="Página de rotas da selva">
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/routes_guide.png" width="900" alt="Guia de rotas da selva">
 </p>
 
 ### Builds e runas observadas
