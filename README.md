@@ -9,7 +9,7 @@
 Estatísticas de League of Legends organizadas para comparar campeões, rotas de clear,
 builds, runas, confrontos e movimentação pelo mapa.
 
-<a href="https://SEU-LINK-RAILWAY">
+<a href="https://web-production-36833dbf.up.railway.app">
   <img src="https://img.shields.io/badge/Acessar%20o%20JungleGG-Entrar-3b82f6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Acessar o JungleGG">
 </a>
 
