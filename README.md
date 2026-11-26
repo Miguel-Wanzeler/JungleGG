@@ -18,11 +18,19 @@ builds, runas, confrontos e movimentação pelo mapa.
 
 <img src="docs/screenshots/home.png" width="900" alt="Página inicial do JungleGG">
 
+<br>
+
+[▶️ Ver apresentação em vídeo](docs/videos/junglegg-apresentacao.mp4)
+
 </div>
 
 ---
 
 ## Sobre o projeto
+
+> [!NOTE]
+> Esta é uma versão em evolução. Algumas telas e dados podem sofrer ajustes,
+> novos bugs podem aparecer e novas partidas continuam ampliando as amostras.
 
 O **JungleGG** transforma dados de partidas ranqueadas em uma experiência rápida e visual.
 Em vez de dispersar informações em tabelas complexas, o projeto apresenta cada campeão
