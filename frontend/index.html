@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JungleGG | Estatísticas para junglers</title>
+  <link rel="icon" href="assets/logo.svg?v=2" type="image/svg+xml">
+
+  <!-- Fontes: Bricolage Grotesque (títulos e números) e Instrument Sans (textos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Atalho pra quem navega só com o teclado pular o menu -->
+  <a class="pular" href="#destaques">Ir para os campeões</a>
+
+  <header class="navbar">
+    <div class="navbar__interno">
+      <a class="logo" href="index.html">
+        <img src="assets/logo.svg?v=2" alt="" width="36" height="36">
+        <span>JungleGG</span>
+      </a>
+      <nav class="navbar__links" aria-label="Principal">
+        <a href="index.html" aria-current="page">Início</a>
+        <a href="rotas.html">Rotas</a>
+        <a href="campeoes.html">Campeões</a>
+        <a href="sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO: texto + busca à esquerda, arte do campeão mais jogado à direita -->
+    <section class="hero">
+      <div class="hero__texto">
+        <h1>Tudo sobre o seu jungler</h1>
+        <p>Rota de clear, build e winrate de cada campeão da selva.</p>
+
+        <!-- Busca: campo + lista de sugestões navegável por teclado -->
+        <div class="busca">
+          <label class="sr" for="campo-busca">Buscar campeão</label>
+          <input id="campo-busca" type="text" role="combobox" autocomplete="off"
+                 aria-expanded="false" aria-controls="resultados" aria-autocomplete="list"
+                 placeholder="Buscar campeão...">
+          <kbd aria-hidden="true">/</kbd>
+          <ul id="resultados" role="listbox" aria-label="Campeões encontrados" hidden></ul>
+        </div>
+      </div>
+
+      <!-- Preenchido pelo JS com o campeão mais jogado -->
+      <a class="hero__arte" id="hero-arte" href="#" hidden>
+        <img alt="" width="1215" height="717">
+        <span class="hero__legenda" id="hero-legenda"></span>
+      </a>
+    </section>
+
+    <section class="secao" id="destaques">
+      <div class="secao__topo">
+        <h2>Campeões em alta</h2>
+        <div class="abas" role="group" aria-label="Ordenar por">
+          <button type="button" data-ordem="pick" aria-pressed="true">Mais jogados</button>
+          <button type="button" data-ordem="win" aria-pressed="false">Maior winrate</button>
+          <button type="button" data-ordem="ban" aria-pressed="false">Mais banidos</button>
+        </div>
+      </div>
+      <p class="fonte" id="fonte"></p>
+      <div class="grid" id="grid" aria-live="polite"></div>
+      <a class="ver-todos" href="campeoes.html">Ver todos os campeões</a>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape__topo">
+      <a class="logo" href="index.html">
+        <img src="assets/logo.svg?v=2" alt="" width="36" height="36">
+        <span>JungleGG</span>
+      </a>
+      <div class="rodape__coluna">
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="rotas.html">Rotas</a></li>
+          <li><a href="campeoes.html">Campeões</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </div>
+      <div class="rodape__coluna">
+        <h3>Contato</h3>
+        <ul>
+          <li><a href="https://github.com/Miguel-Wanzeler" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/miguel-wanzeler/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="mailto:contatomiguelwanzeler@gmail.com">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="rodape__legal">
+      © 2026 JungleGG. JungleGG isn't endorsed by Riot Games and doesn't reflect the views or
+      opinions of Riot Games or anyone officially involved in producing or managing League of
+      Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot
+      Games, Inc. League of Legends © Riot Games, Inc.
+    </p>
+  </footer>
+
+  <script defer src="/js/home.js"></script>
+</body>
+</html>

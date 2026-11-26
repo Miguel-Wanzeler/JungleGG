@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JungleGG | Campeão</title>
+<link rel="icon" href="assets/logo.svg?v=2" type="image/svg+xml">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/campeao.css?v=3">
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="navbar__interno">
+    <a class="logo" href="index.html">
+      <img src="assets/logo.svg?v=2" alt="" width="36" height="36">
+      <span>JungleGG</span>
+    </a>
+
+    <nav class="navbar__links">
+      <a href="index.html">Início</a>
+      <a href="rotas.html">Rotas</a>
+      <a href="campeoes.html">Campeões</a>
+      <a href="sobre.html">Sobre</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="champion-hero">
+
+  <img id="hero-splash" class="champion-hero__splash">
+
+  <div class="champion-hero__overlay">
+
+    <img id="hero-icon" class="champion-icon">
+
+    <div>
+
+      <span class="badge-tier" id="tier">
+        S+
+      </span>
+
+      <h1 id="nome">
+        Carregando...
+      </h1>
+
+      <p id="titulo"></p>
+
+      <div id="classes" class="champion-tags"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="champion-stats">
+
+  <article class="stat-card">
+    <span>Win Rate</span>
+    <strong id="win">--</strong>
+  </article>
+
+  <article class="stat-card">
+    <span>Pick Rate</span>
+    <strong id="pick">--</strong>
+  </article>
+
+  <article class="stat-card">
+    <span>Ban Rate</span>
+    <strong id="ban">--</strong>
+  </article>
+
+  <article class="stat-card">
+    <span>KDA</span>
+    <strong id="kda">--</strong>
+    <small id="kda-detalhe">-- eliminacoes / partida</small>
+  </article>
+
+</section>
+
+<nav class="campeao-nav" aria-label="Navegação da página do campeão">
+  <a href="#guia">Guia</a>
+  <a href="#builds">Builds e runas</a>
+  <a href="#situacao">Preparação de partida</a>
+  <a href="#confrontos">Confrontos</a>
+  <a href="#mapa-presenca">Mapa de presença</a>
+</nav>
+
+<section class="conteudo-campeao" id="guia" aria-label="Guia do campeão">
+  <article class="card-ui card-ui--clear">
+
+    <div class="card-header">
+      <div>
+        <span class="secao-etiqueta">Primeiros minutos</span>
+        <h2>Rota de Clear</h2>
+      </div>
+      <span class="fonte-guia">
+        Rota estimada, não extraída das partidas · imagens:
+        <a href="https://wiki.leagueoflegends.com/en-us/" target="_blank" rel="noopener noreferrer">League Wiki</a>
+      </span>
+    </div>
+
+    <div id="clear" class="clear-route"></div>
+    <div class="clear-itens">
+      <div>
+        <span class="secao-etiqueta">Itens observados</span>
+        <h3>Patch da jungle</h3>
+        <small class="clear-itens__fonte">Atualização automática pelas partidas coletadas</small>
+      </div>
+      <div id="clear-build" class="clear-build" aria-live="polite">
+        <span class="dado-vazio">Aguardando partidas coletadas.</span>
+      </div>
+    </div>
+
+  </article>
+
+  <article class="card-ui">
+    <span class="secao-etiqueta">Progressão de níveis</span>
+    <h2>Ordem de Habilidades</h2>
+    <small id="fonte-habilidades" class="fonte-matchup">
+      Ordem observada nas partidas ranqueadas de alto elo
+    </small>
+    <div id="skills"></div>
+  </article>
+</section>
+
+<section class="conteudo-campeao duas-colunas" id="builds" aria-label="Builds e runas">
+  <article class="card-ui">
+    <span class="secao-etiqueta">Itens finais observados</span>
+    <h2>Builds mais frequentes</h2>
+    <small id="fonte-build" class="fonte-matchup">Aguardando partidas coletadas</small>
+    <div id="build" class="build-variacoes"></div>
+  </article>
+
+  <article class="card-ui">
+    <span class="secao-etiqueta">Escolhas observadas</span>
+    <h2>Páginas de runas</h2>
+    <small id="fonte-runas" class="fonte-matchup">Aguardando partidas coletadas</small>
+    <div id="runas"></div>
+  </article>
+</section>
+
+<section class="conteudo-campeao" id="situacao" aria-label="Desempenho situacional">
+  <article class="card-ui">
+    <div class="card-header situacao-cabecalho">
+      <div>
+        <span class="secao-etiqueta">Contexto da partida</span>
+        <h2>Preparação por lado e confronto</h2>
+        <p class="situacao-descricao">
+          Escolha o lado e o jungler inimigo para ver resultados, builds e runas observados.
+        </p>
+      </div>
+      <div class="situacao-controles">
+        <label>
+          <span>Seu lado</span>
+          <select id="situacao-lado" aria-label="Seu lado no mapa">
+            <option value="100">Azul</option>
+            <option value="200">Vermelho</option>
+          </select>
+        </label>
+        <label>
+          <span>Jungler inimigo</span>
+          <select id="situacao-adversario" aria-label="Jungler adversário">
+            <option value="">Todos os confrontos</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div id="situacao-resumo" class="situacao-resumo" aria-live="polite"></div>
+    <div id="situacao-detalhes" class="situacao-detalhes"></div>
+  </article>
+</section>
+
+<section class="conteudo-campeao duas-colunas" id="confrontos" aria-label="Confrontos">
+
+  <article class="card-ui matchup-card matchup-card--bom">
+
+    <span class="secao-etiqueta">Vantagem no jungle</span>
+    <h2>Forte Contra</h2>
+    <small id="fonte-forte" class="fonte-matchup">Calculando confrontos...</small>
+
+    <div id="forte" class="matchups"></div>
+
+  </article>
+
+  <article class="card-ui matchup-card matchup-card--ruim">
+
+    <span class="secao-etiqueta">Confrontos difíceis</span>
+    <h2>Fraco Contra</h2>
+    <small id="fonte-fraco" class="fonte-matchup">Calculando confrontos...</small>
+
+    <div id="fraco" class="matchups"></div>
+
+  </article>
+
+</section>
+
+<section class="conteudo-campeao" id="mapa-presenca">
+  <article class="card-ui">
+    <span class="secao-etiqueta">Rotação pelo mapa</span>
+    <h2>Mapa de presença do jungler</h2>
+    <p class="mapa-descricao">
+      Posições amostradas aproximadamente uma vez por minuto. A camada de abates
+      marca eliminações com participação do jungler, não necessariamente ganks.
+    </p>
+    <div class="mapa-abas" role="group" aria-label="Camada do mapa de calor">
+      <button type="button" data-camada="movimentacao" aria-pressed="true">Movimentação</button>
+      <button type="button" data-camada="abates" aria-pressed="false">Abates participados</button>
+    </div>
+    <div class="mapa-calor" id="mapa-calor">
+      <img id="mapa-imagem" alt="Mapa de Summoner's Rift">
+      <div id="mapa-pontos" aria-hidden="true"></div>
+    </div>
+    <p class="mapa-status" id="mapa-status" aria-live="polite">Carregando dados do mapa...</p>
+    <div class="mapa-legenda" aria-label="Legenda de intensidade">
+      <span>Menor frequência</span>
+      <i aria-hidden="true"></i>
+      <span>Maior frequência</span>
+    </div>
+  </article>
+</section>
+
+</main>
+
+<footer class="rodape">
+  <div class="rodape__topo">
+    <a class="logo" href="index.html">
+      <img src="assets/logo.svg?v=2" alt="" width="36" height="36">
+      <span>JungleGG</span>
+    </a>
+    <div class="rodape__coluna">
+      <h3>Navegação</h3>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="rotas.html">Rotas</a></li>
+        <li><a href="campeoes.html">Campeões</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+      </ul>
+    </div>
+    <div class="rodape__coluna">
+      <h3>Contato</h3>
+      <ul>
+        <li><a href="https://github.com/Miguel-Wanzeler" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/miguel-wanzeler/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:contatomiguelwanzeler@gmail.com">Contato</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="rodape__legal">
+    © 2026 JungleGG. JungleGG isn't endorsed by Riot Games and doesn't reflect the views or
+    opinions of Riot Games or anyone officially involved in producing or managing League of
+    Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot
+    Games, Inc. League of Legends © Riot Games, Inc.
+  </p>
+</footer>
+
+<script src="js/campeao.js?v=6"></script>
+
+</body>
+</html>

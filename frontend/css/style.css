@@ -1,0 +1,220 @@
+/* ==================================================================
+   TOKENS: as cores do Figma e as fontes num lugar só.
+   Mudou uma cor aqui, muda no site inteiro.
+   ================================================================== */
+:root {
+  --fundo: #0F1319;
+  --superficie: #161B22;
+  --borda: #2D3748;
+  --texto: #FFFFFF;
+  --suave: #A0AEC0;
+  --azul: #3B82F6;      /* destaque: foco, aba ativa, link atual */
+  --verde: #22C55E;     /* winrate acima de 50% */
+  --vermelho: #EF4444;  /* winrate abaixo de 50% */
+  --violeta: #A78BFA;   /* ban */
+  --titulo: "Bricolage Grotesque", system-ui, sans-serif;
+  --corpo: "Instrument Sans", system-ui, sans-serif;
+  --max: 1200px;
+}
+
+/* ---------- BASE ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font: 400 16px/1.5 var(--corpo);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;   /* empurra o rodapé pro fim da página */
+}
+main { flex: 1; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; cursor: pointer; }
+
+/* Foco visível pra quem usa teclado */
+:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; border-radius: 6px; }
+
+/* Texto só pra leitor de tela */
+.sr, .pular:not(:focus) {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+.pular:focus {
+  position: fixed; top: 8px; left: 8px; z-index: 50;
+  background: var(--azul); padding: 8px 14px; border-radius: 8px;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(22, 27, 34, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--borda);
+}
+.navbar__interno {
+  max-width: var(--max); margin: 0 auto; padding: 14px 48px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.logo { display: flex; align-items: center; gap: 12px; font: 700 21px var(--titulo); }
+.navbar__links { display: flex; gap: 32px; font-weight: 500; color: var(--suave); }
+.navbar__links a:hover { color: var(--texto); }
+.navbar__links a[aria-current="page"] { color: var(--azul); }
+
+/* ---------- HERO ---------- */
+.hero {
+  max-width: var(--max); margin: 0 auto; padding: 72px 48px 40px;
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 40px; align-items: center;
+}
+.hero h1 {
+  font: 700 clamp(40px, 5.2vw, 64px) / 1.04 var(--titulo);
+  letter-spacing: -0.02em; margin-bottom: 16px;
+}
+.hero__texto > p { color: var(--suave); font-size: 18px; max-width: 44ch; margin-bottom: 28px; }
+
+/* Arte do campeão mais jogado. A faixa de gradiente funde a imagem com o fundo. */
+.hero__arte {
+  position: relative; display: block; aspect-ratio: 16 / 10;
+  border-radius: 20px; overflow: hidden; border: 1px solid var(--borda);
+}
+.hero__arte[hidden] { display: none; }
+.hero__arte img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 20%; transition: transform 0.6s; }
+.hero__arte:hover img { transform: scale(1.04); }
+.hero__arte::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--fundo) 0%, transparent 45%),
+    linear-gradient(0deg, rgba(15, 19, 25, 0.9), transparent 45%);
+}
+.hero__legenda { position: absolute; left: 18px; bottom: 14px; z-index: 1; font: 600 16px var(--titulo); }
+
+/* ---------- BUSCA (campo + sugestões) ---------- */
+.busca { position: relative; max-width: 520px; }
+.busca input {
+  width: 100%; height: 56px; padding: 0 52px 0 18px; font: inherit; font-size: 17px;
+  color: var(--texto); background: var(--superficie);
+  border: 1px solid var(--borda); border-radius: 12px;
+}
+.busca input::placeholder { color: var(--suave); }
+.busca input:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18); }
+.busca kbd {
+  position: absolute; right: 14px; top: 15px; min-width: 26px; text-align: center;
+  padding: 2px 8px; font: 500 14px var(--corpo); color: var(--suave);
+  border: 1px solid var(--borda); border-radius: 6px; transition: opacity 0.15s;
+}
+.busca:focus-within kbd { opacity: 0; }
+
+#resultados {
+  position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 20;
+  list-style: none; padding: 6px; background: var(--superficie);
+  border: 1px solid var(--borda); border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+#resultados[hidden] { display: none; }
+#resultados li { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+#resultados li[aria-selected="true"] { background: rgba(59, 130, 246, 0.18); }
+#resultados img { width: 36px; height: 36px; border-radius: 8px; }
+#resultados .nome { font-weight: 600; line-height: 1.2; }
+#resultados .sub { font-size: 13px; color: var(--suave); }
+#resultados .vazio { cursor: default; color: var(--suave); font-size: 15px; padding: 12px 10px; }
+
+/* ---------- SEÇÃO DE DESTAQUES ---------- */
+.secao { max-width: var(--max); margin: 0 auto; padding: 32px 48px 72px; }
+.secao__topo { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 8px; }
+.secao h2 { font: 700 30px var(--titulo); letter-spacing: -0.01em; }
+.fonte { color: var(--suave); font-size: 14px; margin-bottom: 20px; min-height: 21px; }
+
+.abas { display: flex; gap: 4px; padding: 4px; background: var(--superficie); border: 1px solid var(--borda); border-radius: 999px; }
+.abas button { background: none; border: 0; padding: 8px 16px; border-radius: 999px; color: var(--suave); font-weight: 500; font-size: 14px; transition: background 0.2s, color 0.2s; }
+.abas button:hover { color: var(--texto); }
+.abas button[aria-pressed="true"] { background: var(--azul); color: #fff; }
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.ver-todos { display: inline-block; margin-top: 28px; color: var(--azul); font-weight: 600; }
+.ver-todos:hover { text-decoration: underline; }
+
+/* ---------- CARD DE CAMPEÃO ---------- */
+.card {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: flex; flex-direction: column; gap: 14px; padding: 18px;
+  background: var(--superficie); border: 1px solid var(--borda); border-radius: 14px;
+  transition: border-color 0.15s;
+}
+.card:hover { border-color: var(--azul); }
+/* Arte do campeão atrás do card, só visível à direita e bem apagada */
+.card__fundo {
+  position: absolute; inset: 0; z-index: -1;
+  background-size: cover; background-position: right top; opacity: 0.2;
+  -webkit-mask-image: linear-gradient(270deg, #000, transparent 70%);
+  mask-image: linear-gradient(270deg, #000, transparent 70%);
+  transition: transform 0.5s, opacity 0.3s;
+}
+.card:hover .card__fundo { opacity: 0.4; transform: scale(1.06); }
+
+.card__topo { display: flex; align-items: center; gap: 12px; }
+.card__icone { width: 56px; height: 56px; border-radius: 10px; border: 1px solid var(--borda); }
+.card h3 { font: 700 19px / 1.2 var(--titulo); }
+.card__classe { font-size: 13px; color: var(--suave); }
+
+.win { display: flex; justify-content: space-between; align-items: baseline; }
+.win span { font-size: 13px; color: var(--suave); }
+.win strong { font: 700 30px / 1 var(--titulo); font-variant-numeric: tabular-nums; }
+.bom { color: var(--verde); }
+.ruim { color: var(--vermelho); }
+
+/* Barra de winrate. A largura vem da variável --v e só "enche" quando a grade ganha .pronto */
+.barra { height: 6px; border-radius: 99px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
+.barra i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--verde); transition: width 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.barra i.ruim { background: var(--vermelho); }
+.grid.pronto .barra i,
+.grade-campeoes.pronto .barra i,
+.grade-destaques.pronto .barra i { width: var(--v); }
+
+.mini { display: flex; justify-content: space-between; font-size: 14px; color: var(--suave); }
+.mini b { color: var(--texto); font-weight: 600; font-variant-numeric: tabular-nums; }
+.mini .ban { color: var(--violeta); }
+
+/* Carregando: cards vazios com um brilho passando */
+.card--esqueleto {
+  min-height: 176px; border-color: var(--borda);
+  background: linear-gradient(100deg, var(--superficie) 40%, #1D2430 50%, var(--superficie) 60%);
+  background-size: 300% 100%; animation: brilho 1.4s linear infinite;
+}
+@keyframes brilho { to { background-position: -100% 0; } }
+
+/* Erro: diz o que aconteceu e oferece a saída */
+.erro { grid-column: 1 / -1; padding: 28px; border: 1px dashed var(--borda); border-radius: 14px; text-align: center; color: var(--suave); }
+.erro button { margin-top: 14px; padding: 10px 20px; background: var(--azul); border: 0; border-radius: 10px; color: #fff; font-weight: 600; }
+
+/* ---------- RODAPÉ ---------- */
+.rodape { background: var(--superficie); border-top: 1px solid var(--borda); }
+.rodape__topo { max-width: var(--max); margin: 0 auto; padding: 32px 48px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; }
+.rodape__coluna h3 { font-size: 14px; margin-bottom: 12px; }
+.rodape__coluna ul { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--suave); }
+.rodape__coluna a:hover { color: var(--texto); }
+.rodape__legal { max-width: var(--max); margin: 0 auto; padding: 16px 48px; border-top: 1px solid var(--borda); font-size: 12px; color: var(--suave); }
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding-top: 48px; }
+  .hero__arte { display: none; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .navbar__interno { flex-wrap: wrap; padding: 12px 20px; gap: 8px; }
+  .navbar__links { width: 100%; gap: 20px; overflow-x: auto; }
+  .hero, .secao, .rodape__topo, .rodape__legal { padding-left: 20px; padding-right: 20px; }
+  .grid { grid-template-columns: 1fr; }
+  .abas { width: 100%; overflow-x: auto; }
+}
+
+/* Quem pediu menos movimento no sistema recebe tudo sem animação */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .grid .barra i,
+  .grade-campeoes .barra i,
+  .grade-destaques .barra i { width: var(--v); }
+}

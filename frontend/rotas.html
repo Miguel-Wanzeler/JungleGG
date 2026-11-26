@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JungleGG | Rotas da selva</title>
+  <link rel="icon" href="assets/logo.svg?v=2" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/listas.css?v=6">
+</head>
+<body>
+  <a class="pular" href="#rota-campeao">Ir para a rota</a>
+
+  <header class="navbar">
+    <div class="navbar__interno">
+      <a class="logo" href="index.html">
+        <img src="assets/logo.svg?v=2" alt="" width="36" height="36">
+        <span>JungleGG</span>
+      </a>
+      <nav class="navbar__links" aria-label="Principal">
+        <a href="index.html">Início</a>
+        <a href="rotas.html" aria-current="page">Rotas</a>
+        <a href="campeoes.html">Campeões</a>
+        <a href="sobre.html">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="diretorio-hero rotas-hero">
+      <span class="etiqueta">Planeje seus primeiros minutos</span>
+      <h1>Rotas de clear</h1>
+      <p>Compare sugestões de caminho e planeje os primeiros minutos da partida.</p>
+      <div class="rotas-controles">
+        <div id="seletor-lado" class="seletor-lado" role="group" aria-label="Perspectiva do mapa" hidden>
+          <button type="button" class="seletor-lado__botao" data-lado="blue" aria-pressed="true">Lado azul</button>
+          <button type="button" class="seletor-lado__botao" data-lado="red" aria-pressed="false">Lado vermelho</button>
+        </div>
+        <label class="seletor-rota" for="busca-rota">
+          <span class="sr">Buscar um campeão para ver sua rota</span>
+          <input id="busca-rota" type="search" placeholder="Buscar campeão..." autocomplete="off" aria-controls="resultados-rota" aria-expanded="false">
+          <span class="atalho-busca" aria-hidden="true">⌕</span>
+          <span id="resultados-rota" class="resultados-rota" role="listbox" hidden></span>
+        </label>
+      </div>
+      <p id="status-rotas" class="fonte-diretorio" aria-live="polite">Carregando campeões...</p>
+    </section>
+
+    <section class="rota-conteudo" id="rota-campeao">
+      <div class="rota-layout" id="rota-area">
+        <article id="rota-geral" class="rota-painel-principal rota-visao-geral">
+          <header class="rota-visao-geral__cabecalho">
+            <span class="etiqueta">Guia geral da selva</span>
+            <h2>Planeje sua partida sem escolher um campeão</h2>
+            <p>Veja itens observados nas partidas e entenda os estilos mais comuns. Escolha um campeão na busca para abrir uma sugestão de rota específica.</p>
+          </header>
+
+          <section class="rota-visao-bloco" aria-labelledby="titulo-itens-gerais">
+            <div class="rota-visao-bloco__cabecalho">
+              <div>
+                <span class="etiqueta">Dados agregados</span>
+                <h3 id="titulo-itens-gerais">Itens mais vistos nos junglers</h3>
+              </div>
+              <span class="rota-visao-bloco__nota">Inventários finais</span>
+            </div>
+            <div id="itens-gerais" class="itens-gerais" aria-live="polite">
+              <p class="estado-rota">Carregando os itens das partidas...</p>
+            </div>
+            <p id="fonte-itens-gerais" class="rota-visao-bloco__fonte">
+              Os itens mostram frequência no inventário final, não ordem de compra nem uma build obrigatória.
+            </p>
+          </section>
+
+          <section class="rota-visao-bloco" aria-labelledby="titulo-perfis-selva">
+            <div class="rota-visao-bloco__cabecalho">
+              <div>
+                <span class="etiqueta">Estilos de jogo</span>
+                <h3 id="titulo-perfis-selva">O que cada perfil costuma fazer</h3>
+              </div>
+            </div>
+            <div class="perfis-selva">
+              <article class="perfil-selva">
+                <h4>Assassinos</h4>
+                <p>Procuram alvos frágeis e oportunidades de emboscada; visão e escolha do momento de entrar são essenciais.</p>
+              </article>
+              <article class="perfil-selva">
+                <h4>Lutadores</h4>
+                <p>Brilham em duelos e escaramuças, combinando dano com resistência para disputar espaço e objetivos.</p>
+              </article>
+              <article class="perfil-selva">
+                <h4>Tanques e iniciadores</h4>
+                <p>Começam lutas, absorvem pressão e protegem aliados com controle de grupo e presença na linha de frente.</p>
+              </article>
+              <article class="perfil-selva">
+                <h4>Magos</h4>
+                <p>Oferecem dano mágico, alcance ou controle de área; costumam valorizar posicionamento e janelas de poder.</p>
+              </article>
+              <article class="perfil-selva">
+                <h4>Atiradores</h4>
+                <p>Dependem de espaço e posicionamento para causar dano contínuo, muitas vezes crescendo com ouro e itens.</p>
+              </article>
+              <article class="perfil-selva">
+                <h4>Suportes e híbridos</h4>
+                <p>Ajudam a equipe com proteção, controle, visão ou iniciação; a prioridade varia conforme o campeão.</p>
+              </article>
+            </div>
+            <p class="rota-visao-bloco__fonte">
+              São tendências gerais das classes, não regras para todos os campeões. Use a busca para consultar o campeão que pretende jogar.
+            </p>
+          </section>
+
+          <section class="rota-visao-bloco" aria-labelledby="titulo-plano-selva">
+            <div class="rota-visao-bloco__cabecalho">
+              <div>
+                <span class="etiqueta">Plano de jogo</span>
+                <h3 id="titulo-plano-selva">Um roteiro simples para a partida</h3>
+              </div>
+            </div>
+            <div class="plano-selva">
+              <article>
+                <span>01</span>
+                <h4>Faça o primeiro clear</h4>
+                <p>Limpe acampamentos com eficiência e observe quais rotas aliadas e inimigas permitem uma jogada segura.</p>
+              </article>
+              <article>
+                <span>02</span>
+                <h4>Escolha uma rotação</h4>
+                <p>Depois do primeiro ciclo, pese gank, invasão ou retorno à selva de acordo com vida, prioridade de rota e visão.</p>
+              </article>
+              <article>
+                <span>03</span>
+                <h4>Prepare os objetivos</h4>
+                <p>Avise a equipe e controle a visão antes dos objetivos; não os dispute sem avaliar a situação das rotas.</p>
+              </article>
+            </div>
+          </section>
+        </article>
+
+        <article id="rota-card" class="rota-painel-principal" data-lado="blue" hidden>
+          <div class="rota-cabecalho">
+            <img id="rota-icone" class="rota-icone" alt="">
+            <div class="rota-titulo">
+              <span class="etiqueta">Sugestão de clear</span>
+              <h2 id="rota-nome"></h2>
+              <p id="rota-resumo"></p>
+            </div>
+            <div class="rota-cabecalho__acoes">
+              <button id="rota-voltar-geral" class="botao-secundario" type="button">Visão geral</button>
+              <a id="rota-guia" class="botao-secundario" href="#">Ver guia</a>
+            </div>
+          </div>
+
+          <div class="rota-mapa" id="rota-mapa">
+            <img id="rota-mapa-imagem" class="rota-mapa__arte" alt="Mapa de Summoner's Rift">
+            <svg class="rota-mapa__caminho" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <polyline id="rota-caminho" points=""></polyline>
+            </svg>
+            <div id="rota-marcadores" class="rota-mapa__marcadores"></div>
+            <div id="rota-mapa-fallback" class="rota-mapa__fallback" hidden>Mapa indisponível</div>
+            <span id="rota-lado-mapa" class="rota-mapa__lado">Lado azul</span>
+          </div>
+
+          <div class="rota-sequencia">
+            <div class="rota-sequencia__cabecalho">
+              <h3>Ordem sugerida</h3>
+              <span>Acampamentos e tempo estimado</span>
+            </div>
+            <div class="rota-passos" id="rota-passos"></div>
+          </div>
+          <div class="rota-itens" id="rota-itens">
+            <div class="rota-sequencia__cabecalho">
+              <h3>Patch da jungle</h3>
+              <span>Até os 10 minutos · atualização automática</span>
+            </div>
+            <div id="rota-build" class="rota-build" aria-live="polite">
+              <p class="estado-rota">Aguardando dados do campeão...</p>
+            </div>
+          </div>
+          <p class="aviso-rota">
+            Estimativa por perfil do campeão, não uma média comprovada das partidas. Os marcadores do mapa são ilustrativos.
+            Alternar o lado muda a perspectiva, não a ordem; adapte o início e as rotações à partida.
+          </p>
+        </article>
+
+        <aside class="rota-painel-populares" aria-labelledby="titulo-rotas-populares">
+          <div class="rota-painel-populares__cabecalho">
+            <div>
+              <span class="etiqueta">Baseado nas partidas</span>
+              <h2 id="titulo-rotas-populares">Rotas populares</h2>
+            </div>
+            <span class="rota-painel-populares__info">Mais escolhidos</span>
+          </div>
+          <div id="rotas-populares" class="rota-populares" aria-live="polite">
+            <p class="estado-rota">Carregando rotas populares...</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape__topo">
+      <a class="logo" href="index.html">
+        <img src="assets/logo.svg?v=2" alt="" width="36" height="36">
+        <span>JungleGG</span>
+      </a>
+      <div class="rodape__coluna">
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="rotas.html">Rotas</a></li>
+          <li><a href="campeoes.html">Campeões</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </div>
+      <div class="rodape__coluna">
+        <h3>Contato</h3>
+        <ul>
+          <li><a href="https://github.com/Miguel-Wanzeler" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/miguel-wanzeler/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="mailto:contatomiguelwanzeler@gmail.com">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="rodape__legal">
+      © 2026 JungleGG. JungleGG isn't endorsed by Riot Games and doesn't reflect the views or
+      opinions of Riot Games or anyone officially involved in producing or managing League of
+      Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot
+      Games, Inc. League of Legends © Riot Games, Inc.
+    </p>
+  </footer>
+
+  <script defer src="js/rotas.js?v=8"></script>
+</body>
+</html>
