@@ -1,140 +1,114 @@
-# <img src="frontend/assets/logo.svg?v=2" width="42" align="center"> JungleGG
+<div align="center">
 
-**Estatísticas de League of Legends feitas para quem joga na selva.**
+<img src="frontend/assets/logo.svg?v=2" width="118" alt="JungleGG">
 
-O JungleGG transforma dados de partidas ranqueadas em recomendações visuais de campeões, rotas de clear, builds, runas, confrontos e movimento pelo mapa.
+# JungleGG
 
-> JungleGG não é aprovado pela Riot Games e não reflete as opiniões da Riot Games ou de pessoas oficialmente envolvidas com League of Legends.
+### Dados claros para tomar decisões melhores na selva
 
-## Visão geral
+Estatísticas de League of Legends organizadas para comparar campeões, rotas de clear,
+builds, runas, confrontos e movimentação pelo mapa.
 
-- Estatísticas de campeão por partidas coletadas
-- Taxa de vitória, escolha e banimento
-- Builds e runas mais observadas
-- Patch inicial observado nos primeiros 10 minutos
-- Sugestão de clear por perfil de campeão
-- Confrontos fortes e difíceis
-- Mapa de presença e participação em abates
-- Dados por lado azul ou vermelho
-- Interface responsiva para desktop e celular
+<a href="https://SEU-LINK-RAILWAY">
+  <img src="https://img.shields.io/badge/Acessar%20o%20JungleGG-Entrar-3b82f6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Acessar o JungleGG">
+</a>
+
+<br>
+<br>
+
+<img src="docs/screenshots/home.png" width="900" alt="Página inicial do JungleGG">
+
+</div>
+
+---
+
+## Sobre o projeto
+
+O **JungleGG** transforma dados de partidas ranqueadas em uma experiência rápida e visual.
+Em vez de dispersar informações em tabelas complexas, o projeto apresenta cada campeão
+com os dados que mais ajudam na preparação da partida.
+
+As estatísticas são observadas em partidas reais e podem mudar conforme o patch,
+a amostra disponível e o comportamento atual dos jogadores.
+
+## Principais recursos
+
+### Campeões em destaque
+
+Descubra os junglers mais escolhidos, mais banidos e com melhor taxa de vitória.
+Filtre por nome ou classe e abra o guia completo de cada campeão.
+
+<p align="center">
+  <img src="docs/screenshots/campeao.png" width="900" alt="Página de detalhes do campeão">
+</p>
+
+### Rotas de clear
+
+Compare a ordem dos acampamentos, o tempo estimado de cada etapa e a perspectiva
+dos lados azul e vermelho.
+
+<p align="center">
+  <img src="docs/screenshots/rotas.png" width="900" alt="Página de rotas da selva">
+</p>
+
+### Builds e runas observadas
+
+Veja os itens finais, páginas de runas e escolhas mais frequentes registradas nas
+partidas coletadas. Também é possível consultar os itens de patch usados nos
+primeiros 10 minutos.
+
+### Preparação por confronto
+
+Analise confrontos favoráveis e desfavoráveis, o resultado por lado do mapa e
+os contextos com amostra suficiente para uma leitura responsável.
+
+### Mapa de presença
+
+Visualize as posições de movimentação e abates participados pelo jungler ao longo
+das partidas disponíveis.
+
+---
+
+## Como os dados são apresentados
+
+- Taxas são exibidas somente com amostra mínima suficiente.
+- Build significa inventário final observado, não uma ordem obrigatória de compra.
+- Patch inicial representa itens comprados até os primeiros 10 minutos.
+- Confrontos com poucos dados são marcados como amostras baixas.
+- Informações antigas continuam disponíveis caso uma atualização esteja temporariamente indisponível.
+
+---
 
 ## Tecnologias
 
-- Python 3.14
-- FastAPI
-- Uvicorn
-- HTTPX
-- HTML, CSS e JavaScript
-- Data Dragon da Riot Games
-- API REST da Riot Games
+<div align="center">
 
-## Executar localmente
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=1a1a1a)
 
-### Pré-requisitos
+</div>
 
-- Python 3.11 ou superior
-- Chave temporária ou de produção da Riot Games
+O projeto usa dados públicos da API da Riot Games e do Data Dragon.
 
-### Instalação
-
-```powershell
-git clone https://github.com/Miguel-Wanzeler/JungleGG.git
-cd JungleGG
-
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
-
-### Configuração
-
-Copie `.env.example` como referência e configure o ambiente do processo.
-
-```powershell
-$env:RIOT_API_KEY="RGAPI-sua-chave"
-$env:ALLOWED_HOSTS="127.0.0.1,localhost"
-$env:COLETOR_AUTOMATICO="1"
-$env:COLETOR_INTERVALO_MINUTOS="60"
-$env:COLETOR_LIMITE="300"
-```
-
-> Nunca envie `RIOT_API_KEY` para o GitHub, HTML ou JavaScript. Use apenas variáveis de ambiente no backend.
-
-### Inicialização
-
-```powershell
-uvicorn main:app --reload --app-dir backend
-```
-
-Acesse `http://127.0.0.1:8000`.
-
-## Coleta automática
-
-O coletor busca jogadores de alto elo do Brasil, partidas ranqueadas recentes e timelines relacionadas.
-
-### Variáveis
-
-| Variável | Finalidade | Padrão |
-|---|---|---|
-| `RIOT_API_KEY` | Chave secreta da API da Riot | Obrigatória |
-| `ALLOWED_HOSTS` | Domínios autorizados pelo servidor | `127.0.0.1,localhost` |
-| `COLETOR_AUTOMATICO` | Liga ou desliga o coletor em segundo plano | `1` |
-| `COLETOR_INTERVALO_MINUTOS` | Intervalo entre execuções | `60` |
-| `COLETOR_LIMITE` | Novas partidas por execução | `300` |
-
-Os dados são gravados em `backend/data/estatisticas.json`. Arquivos de partidas já processadas evitam duplicação.
-
-### Chave da Riot
-
-Chaves temporárias do portal de desenvolvedores expiram em cerca de 24 horas. Para manter o projeto atualizado sem renovação diária, solicite uma chave de produção à Riot Games.
-
-## Estrutura
-
-```text
-backend/
-  main.py
-  coletor.py
-  services/ddragon.py
-  data/
-frontend/
-  assets/
-  css/
-  js/
-  index.html
-  campeoes.html
-  campeao.html
-  rotas.html
-  sobre.html
-```
-
-## Implantação
-
-O projeto inclui `requirements.txt`, `Procfile` e suporte a variáveis de ambiente.
-
-Exemplo para Railway:
-
-```text
-uvicorn main:app --app-dir backend --host 0.0.0.0 --port $PORT
-```
-
-Configure no painel da plataforma:
-
-- `RIOT_API_KEY`
-- `ALLOWED_HOSTS`
-- `COLETOR_AUTOMATICO=1`
-- `COLETOR_INTERVALO_MINUTOS=60`
-- `COLETOR_LIMITE=300`
-
-## Dados e limitações
-
-O JungleGG apresenta tendências observadas, não previsões garantidas. Taxas são exibidas apenas quando existe uma amostra mínima suficiente. Builds representam inventários finais observados e não uma ordem obrigatória de compra.
+---
 
 ## Contato
 
-- GitHub: [Miguel-Wanzeler](https://github.com/Miguel-Wanzeler)
-- LinkedIn: [Miguel Wanzeler](https://www.linkedin.com/in/miguel-wanzeler/)
-- E-mail: [contatomiguelwanzeler@gmail.com](mailto:contatomiguelwanzeler@gmail.com)
+<div align="center">
 
-## Aviso legal
+[![GitHub](https://img.shields.io/badge/GitHub-Miguel--Wanzeler-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Miguel-Wanzeler)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Miguel%20Wanzeler-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/miguel-wanzeler/)
+[![E-mail](https://img.shields.io/badge/E--mail-Contato-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:contatomiguelwanzeler@gmail.com)
 
-JungleGG não é afiliado à Riot Games. League of Legends e Riot Games são marcas ou marcas registradas da Riot Games, Inc.
+</div>
+
+---
+
+> [!IMPORTANT]
+> JungleGG não é aprovado pela Riot Games e não reflete as opiniões da Riot Games
+> ou de qualquer pessoa oficialmente envolvida com League of Legends.
+>
+> League of Legends e Riot Games são marcas ou marcas registradas da Riot Games, Inc.
