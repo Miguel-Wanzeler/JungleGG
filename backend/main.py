@@ -7,7 +7,7 @@ import sys
 from contextlib import asynccontextmanager
 from datetime import datetime
 from fastapi import FastAPI, HTTPException, Query, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, PlainTextResponse
 from pathlib import Path
 from fastapi.staticfiles import StaticFiles
 import json
@@ -746,6 +746,17 @@ async def destaques():
 @app.get("/api/itens/buscar")
 async def procurar_itens(nome: str = "", max_ouro: int | None = None):
     return await buscar_itens(nome, max_ouro)
+
+
+@app.get("/riot.txt", response_class=PlainTextResponse)
+@app.get("/index.html/riot.txt", response_class=PlainTextResponse)
+async def verificar_produto_riot():
+    return PlainTextResponse(
+        "3e2c31ca-81d1-490b-ad47-8bc352dd6a30",
+        media_type="text/plain; charset=utf-8",
+    )
+
+
 # Serve a pasta "frontend" como site. Precisa ficar POR ÚLTIMO:
 # o FastAPI testa as rotas na ordem, então /api/... é atendido antes e
 # todo o resto cai aqui. html=True abre o index.html em "/".
